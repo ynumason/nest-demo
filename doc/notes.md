@@ -60,7 +60,7 @@ export class AppModule { }
 ## 代码示例
 
 ```typescript
-// 示例代码
+// 示例代码3
 ```
 
 ## 遇到的问题及解决方案
