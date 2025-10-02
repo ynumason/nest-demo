@@ -6,12 +6,8 @@ services:
       --collation-server=utf8mb4_general_ci
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=shoppy_db
-      - MYSQL_USER=nestuser
-      - MYSQL_PASSWORD=nestpass
       - MYSQL_LOWER_CASE_TABLE_NAMES=0
     ports:
       - '3306:3306'
     volumes:
       - ./data/mysql:/var/lib/mysql
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
