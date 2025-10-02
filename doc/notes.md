@@ -50,6 +50,26 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 export class AppModule {}
 ```
 
+## Docker 环境配置
+
+### 1. 安装 Docker
+
+确保已安装 Docker Desktop 并正常运行
+
+### 2. 启动数据库容器
+
+```bash
+# 在项目根目录执行
+docker-compose up -d
+```
+
+### 3. 停止数据库容器
+
+```bash
+# 在项目根目录执行
+docker-compose down
+```
+
 ## 技术栈
 
 ## 环境配置

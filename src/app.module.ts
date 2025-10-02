@@ -1,10 +1,24 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
 import { GoodsModule } from './modules/goods/goods.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [UserModule, GoodsModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'nestuser',
+      password: 'nestpass',
+      database: 'shoppy_db',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    UserModule,
+    GoodsModule
+  ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
