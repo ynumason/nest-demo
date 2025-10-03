@@ -22,7 +22,7 @@ nest g s modules/user --no-spec
 ### 1.安装
 
 ```typescript
-pnpm i --save @nestjs/typeorm typeorm mysql
+npm i --save @nestjs/typeorm typeorm mysql
 ```
 
 ### 2.配置数据库
