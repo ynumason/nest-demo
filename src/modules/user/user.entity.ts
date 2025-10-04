@@ -16,7 +16,6 @@ export class User {
   @Column({
     type: 'varchar',
     length: 50,
-    unique: true,
     name: 'username',
     comment: '用户名',
     nullable: false,
@@ -41,7 +40,7 @@ export class User {
 
   @CreateDateColumn({
     name: 'create_at',
-    comment: '创建时间',
+    comment: '创建的时间',
     type: 'timestamp',
     nullable: false,
   })
@@ -49,7 +48,7 @@ export class User {
 
   @UpdateDateColumn({
     name: 'update_at',
-    comment: '更新时间',
+    comment: '更新的时间',
     type: 'timestamp',
     nullable: false,
   })

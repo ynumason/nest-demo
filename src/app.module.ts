@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
 import { GoodsModule } from './modules/goods/goods.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './modules/user/user.entity';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import { User } from './modules/user/user.entity';
       password: '123456',
       database: 'shoppy_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+      synchronize: true,
       dropSchema: false,
       // 自动创建数据库（如果不存在）
       autoLoadEntities: true,
@@ -22,7 +21,6 @@ import { User } from './modules/user/user.entity';
       retryAttempts: 3,
       retryDelay: 3000,
     }),
-    User,
     UserModule,
     GoodsModule,
   ],
