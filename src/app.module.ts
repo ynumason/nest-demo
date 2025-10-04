@@ -14,7 +14,8 @@ import { User } from './modules/user/user.entity';
       password: '123456',
       database: 'shoppy_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
+      dropSchema: false,
       // 自动创建数据库（如果不存在）
       autoLoadEntities: true,
       // 在开发环境中，如果数据库不可用则应用仍然可以启动
@@ -23,9 +24,9 @@ import { User } from './modules/user/user.entity';
     }),
     User,
     UserModule,
-    GoodsModule
+    GoodsModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
