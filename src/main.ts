@@ -16,6 +16,7 @@ async function bootstrap() {
   // 监听端口
   const server = await app.listen(process.env.PORT ?? 3000);
   console.log(`🐳🐳🐳nest serve start on port ${process.env.PORT ?? 3000}`);
+  console.log('github无法推送运行 npm run github:fix');
 
   // 添加连接池状态监控（仅用于开发环境）
   if (process.env.NODE_ENV !== 'production') {
@@ -23,7 +24,6 @@ async function bootstrap() {
       // 注意：这只是一个示例，实际实现需要访问 TypeORM 连接池
       // 真实的监控需要通过 TypeORM 的连接池 API 实现
       console.log('Server running status check');
-      console.log('github无法推送运行 npm run github:fix');
     }, 30000); // 每30秒检查一次
   }
 }
