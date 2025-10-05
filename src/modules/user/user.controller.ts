@@ -1,5 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { UserService } from './user.service';
+import { User } from './user.entity';
 
 @Controller('user')
 export class UserController {
@@ -7,7 +17,9 @@ export class UserController {
 
   // 创建用户
   @Post()
-  async create(@Body() userData: { username: string; password: string }) {
+  async create(
+    @Body() userData: { username: string; password: string },
+  ): Promise<User> {
     return this.userService.createUser(userData.username, userData.password);
   }
 }
