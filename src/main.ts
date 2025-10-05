@@ -23,6 +23,7 @@ async function bootstrap() {
       // 注意：这只是一个示例，实际实现需要访问 TypeORM 连接池
       // 真实的监控需要通过 TypeORM 的连接池 API 实现
       console.log('Server running status check');
+      console.log('github无法推送运行 npm run github:fix');
     }, 30000); // 每30秒检查一次
   }
 }
