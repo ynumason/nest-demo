@@ -7,6 +7,7 @@ import {
   Put,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
@@ -27,6 +28,29 @@ export class UserController {
   @Get()
   async findAll(): Promise<User[]> {
     return this.userService.findAllUsers();
+  }
+
+  // 测试参数获取 Param: Restful Api参数 Query: url传参 Body:Put传参
+  // 测试Body参数获取
+  @Post('unique')
+  async findUniqueData(@Body() reqBody: any) {
+    console.log(reqBody);
+    return reqBody;
+  }
+
+  // 测试Param参数获取3000/user/testparams/data/34/77
+  @Get('/testparams/data/:id/:subid')
+  getData(@Param() params: any): string {
+    console.log(params);
+    return params;
+  }
+
+  // 测试Query参数获取
+  // 3000/user/testquery?id=22&name=北京
+  @Get('testquery')
+  async getQUery(@Query() query: any) {
+    console.log(query);
+    return query;
   }
 
   // 获取单个用户
