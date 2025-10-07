@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 import { User } from './user.entity';
+import { PaginationDto, PaginationResult } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -19,6 +20,60 @@ export class UserService {
   // 查找所有用户
   async findAllUsers(): Promise<User[]> {
     return this.userRepository.find();
+  }
+
+  // 分页查询用户
+  async findUsersWithPagination(
+    paginationDto: PaginationDto,
+  ): Promise<PaginationResult<User>> {
+    const { page = 1, limit = 10 } = paginationDto;
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await this.userRepository.findAndCount({
+      where: { isDel: 0 },
+      skip,
+      take: limit,
+      order: {
+        id: 'ASC',
+      },
+    });
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
+  }
+
+  // 带搜索条件的分页查询
+  async findUsersWithSearchAndPagination(
+    paginationDto: PaginationDto,
+    search: string,
+  ): Promise<PaginationResult<User>> {
+    const { page = 1, limit = 10 } = paginationDto;
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await this.userRepository.findAndCount({
+      where: [
+        { username: Like(`%${search}%`), isDel: 0 },
+        { password: Like(`%${search}%`), isDel: 0 },
+      ],
+      skip,
+      take: limit,
+      order: {
+        id: 'ASC',
+      },
+    });
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   // 通过id查找用户

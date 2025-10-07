@@ -1,16 +1,17 @@
 import {
-  Body,
   Controller,
   Get,
-  Param,
   Post,
   Put,
   Delete,
-  ParseIntPipe,
+  Param,
+  Body,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { PaginationDto } from './user.dto';
 
 @Controller('user')
 export class UserController {
@@ -30,6 +31,24 @@ export class UserController {
     return this.userService.findAllUsers();
   }
 
+  // 分页获取用户
+  @Get('paginate')
+  async findWithPagination(@Query() paginationDto: PaginationDto) {
+    return this.userService.findUsersWithPagination(paginationDto);
+  }
+
+  // 带搜索条件的分页获取用户
+  @Get('search')
+  async findWithSearchAndPagination(
+    @Query() paginationDto: PaginationDto,
+    @Query('search') search: string,
+  ) {
+    return this.userService.findUsersWithSearchAndPagination(
+      paginationDto,
+      search,
+    );
+  }
+
   // 测试参数获取 Param: Restful Api参数 Query: url传参 Body:Put传参
   // 测试Body参数获取
   @Post('unique')
@@ -43,6 +62,13 @@ export class UserController {
   getData(@Param() params: any): string {
     console.log(params);
     return params;
+  }
+
+  // 测试Param参数获取 只获取subid并使用ParsePipe约束类型
+  // /user/pornhub/data/pornchanel/234555
+  @Get('/pornhub/data/:id/:subid')
+  async pornhubData(@Param('subid', ParseIntPipe) subid: number) {
+    return subid;
   }
 
   // 测试Query参数获取
